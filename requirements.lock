@@ -1,0 +1,4 @@
+# Runtime: Python standard library only; no third-party runtime dependencies.
+# Build environment (not required for installing the supplied wheel):
+setuptools==84.0.0
+wheel==0.48.0

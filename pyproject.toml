@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools==84.0.0", "wheel==0.48.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdscan"
+version = "0.1.0rc1"
+description = "Поверхностный HTTP-сканер сайтов: технические наблюдения по ПДн"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "PDScan project"}]
+classifiers = ["Programming Language :: Python :: 3", "Operating System :: POSIX :: Linux"]
+dependencies = []
+
+[project.scripts]
+pdscan = "pdscan.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+pdscan = ["report.schema.json"]

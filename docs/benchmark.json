@@ -1,0 +1,9 @@
+{
+  "fixture_pages": 30,
+  "requests_in_fixture": 60,
+  "elapsed_scan_and_render_seconds": 0.0193,
+  "process_peak_rss_KiB": 16640,
+  "artifacts_bytes": 193507,
+  "scan_status": "complete",
+  "note": "In-memory fixture; no DNS, real requests or throttling. Not a field performance benchmark."
+}

@@ -1,0 +1,1 @@
+{"data":{"at":"2026-10-09T13:08:46.123825+00:00","attempt":1,"body_length":9,"chain":[{"status":404,"url":"https://example.org/policy"}],"content_type":"text/html","error":"","final":"https://example.org/policy","status":404,"tls_code":null,"url":"https://example.org/policy"},"sha256":"396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07"}

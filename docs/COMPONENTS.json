@@ -1,0 +1,20 @@
+{
+  "runtime": {
+    "python_tested": "3.12.14",
+    "python_license": "PSF License",
+    "openssl_tested": "OpenSSL 3.5.8 25 Aug 2026",
+    "third_party_python_dependencies": []
+  },
+  "build": [
+    {
+      "name": "setuptools",
+      "version": "84.0.0",
+      "license": "MIT"
+    },
+    {
+      "name": "wheel",
+      "version": "0.48.0",
+      "license": "MIT"
+    }
+  ]
+}

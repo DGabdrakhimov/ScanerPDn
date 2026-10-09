@@ -1,0 +1,40 @@
+{
+  "scan_id": "21dbc807-59a5-4e4c-b182-7290108048e9",
+  "schema_version": "1.0",
+  "scanner_version": "0.1.0rc1",
+  "ruleset_version": "r1-1",
+  "config": {
+    "target": "https://example.org/",
+    "max_pages": 30,
+    "max_depth": 2,
+    "max_requests": 100,
+    "time_limit": 300,
+    "timeout": 10,
+    "max_redirects": 5,
+    "html_limit": 2097152,
+    "document_limit": 5242880,
+    "byte_limit": 26214400,
+    "interval": 1.0,
+    "allow_hosts": [],
+    "exclude_paths": [],
+    "check_external_docs": false
+  },
+  "started_at": "2026-10-09T13:08:46.122290+00:00",
+  "finished_at": "2026-10-09T13:08:46.123966+00:00",
+  "metrics": {
+    "requests": 4,
+    "bytes": 322,
+    "elapsed_seconds": 0.002
+  },
+  "files": [
+    "report.json",
+    "report.html",
+    "sanitized.log"
+  ],
+  "evidence_sha256": [
+    "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+    "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270",
+    "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+    "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+  ]
+}

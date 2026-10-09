@@ -1,0 +1,15 @@
+[scan]
+max_pages = 30
+max_depth = 2
+max_requests = 100
+max_redirects = 5
+# Расширять область и лимиты следует только для разрешённых проверок.
+time_limit = 300
+timeout = 10
+interval = 1.0
+allow_hosts = []
+exclude_paths = ["/logout", "/delete", "/unsubscribe"]
+check_external_docs = false
+html_limit = 2097152
+document_limit = 5242880
+byte_limit = 26214400

@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PDScan report 1.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "scanner_version",
+    "ruleset_version",
+    "scan_id",
+    "started_at",
+    "finished_at",
+    "target",
+    "scope",
+    "config",
+    "scan_status",
+    "color",
+    "checks",
+    "findings",
+    "inventory",
+    "coverage",
+    "urls",
+    "evidence",
+    "limitations",
+    "legal_verdict",
+    "metrics"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "scanner_version": {
+      "type": "string"
+    },
+    "ruleset_version": {
+      "type": "string"
+    },
+    "scan_id": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finished_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "target": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object"
+    },
+    "config": {
+      "type": "object"
+    },
+    "scan_status": {
+      "enum": [
+        "complete",
+        "partial",
+        "cancelled"
+      ]
+    },
+    "color": {
+      "enum": [
+        "red",
+        "yellow",
+        "grey",
+        "green"
+      ]
+    },
+    "legal_verdict": {
+      "type": "null"
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "rule_id",
+          "machine_key",
+          "url",
+          "outcome",
+          "reason_code",
+          "evidence_refs"
+        ],
+        "properties": {
+          "rule_id": {
+            "enum": [
+              "C01",
+              "C02",
+              "C03",
+              "C04",
+              "C05",
+              "C06",
+              "C07"
+            ]
+          },
+          "machine_key": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "outcome": {
+            "enum": [
+              "pass",
+              "fail",
+              "not_applicable",
+              "not_checked",
+              "inconclusive"
+            ]
+          },
+          "reason_code": {
+            "type": "string"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "finding_id",
+          "rule_id",
+          "url",
+          "fact",
+          "technical_severity",
+          "color",
+          "recommendation",
+          "reference",
+          "legal_verdict",
+          "evidence_refs"
+        ],
+        "properties": {
+          "color": {
+            "enum": [
+              "red",
+              "yellow"
+            ]
+          },
+          "technical_severity": {
+            "enum": [
+              "high",
+              "medium"
+            ]
+          },
+          "legal_verdict": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "required": [
+        "documents",
+        "forms",
+        "cookies",
+        "external_hosts"
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "completed",
+        "planned",
+        "ratio",
+        "known_urls",
+        "visited_urls",
+        "skipped_urls",
+        "note"
+      ],
+      "properties": {
+        "completed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "planned": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ratio": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "urls": {
+      "type": "object",
+      "required": [
+        "known",
+        "visited",
+        "skipped"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "sha256",
+          "data"
+        ]
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "requests",
+        "bytes",
+        "elapsed_seconds"
+      ]
+    }
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "schema_version": "1.0",
+  "scanner_version": "0.1.0rc1",
+  "ruleset_version": "r1-1",
+  "scan_id": "21dbc807-59a5-4e4c-b182-7290108048e9",
+  "started_at": "2026-10-09T13:08:46.122290+00:00",
+  "finished_at": "2026-10-09T13:08:46.123966+00:00",
+  "target": "https://example.org/",
+  "scope": {
+    "hosts": [
+      "example.org"
+    ],
+    "mode": "http-static"
+  },
+  "config": {
+    "target": "https://example.org/",
+    "max_pages": 30,
+    "max_depth": 2,
+    "max_requests": 100,
+    "time_limit": 300,
+    "timeout": 10,
+    "max_redirects": 5,
+    "html_limit": 2097152,
+    "document_limit": 5242880,
+    "byte_limit": 26214400,
+    "interval": 1.0,
+    "allow_hosts": [],
+    "exclude_paths": [],
+    "check_external_docs": false
+  },
+  "scan_status": "partial",
+  "color": "yellow",
+  "checks": [
+    {
+      "rule_id": "C01",
+      "machine_key": "protocol-page-v1",
+      "url": "https://example.org/",
+      "outcome": "pass",
+      "reason_code": "pass",
+      "evidence_refs": [
+        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+      ]
+    },
+    {
+      "rule_id": "C02",
+      "machine_key": "tls-certificate-v1",
+      "url": "https://example.org/",
+      "outcome": "pass",
+      "reason_code": "pass",
+      "evidence_refs": [
+        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+      ]
+    },
+    {
+      "rule_id": "C03",
+      "machine_key": "document-status-v1",
+      "url": "https://example.org/",
+      "outcome": "not_applicable",
+      "reason_code": "not_applicable",
+      "evidence_refs": [
+        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+      ]
+    },
+    {
+      "rule_id": "C04",
+      "machine_key": "document-loop-v1",
+      "url": "https://example.org/",
+      "outcome": "not_applicable",
+      "reason_code": "not_applicable",
+      "evidence_refs": [
+        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+      ]
+    },
+    {
+      "rule_id": "C05",
+      "machine_key": "document-downgrade-v1",
+      "url": "https://example.org/",
+      "outcome": "not_applicable",
+      "reason_code": "not_applicable",
+      "evidence_refs": [
+        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+      ]
+    },
+    {
+      "rule_id": "C06",
+      "machine_key": "form-action-v1",
+      "url": "https://example.org/",
+      "outcome": "fail",
+      "reason_code": "fail",
+      "evidence_refs": [
+        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+      ]
+    },
+    {
+      "rule_id": "C07",
+      "machine_key": "document-empty-v1",
+      "url": "https://example.org/",
+      "outcome": "not_applicable",
+      "reason_code": "not_applicable",
+      "evidence_refs": [
+        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+      ]
+    },
+    {
+      "rule_id": "C01",
+      "machine_key": "protocol-page-v1",
+      "url": "https://example.org/policy",
+      "outcome": "not_applicable",
+      "reason_code": "not_applicable",
+      "evidence_refs": [
+        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+      ]
+    },
+    {
+      "rule_id": "C02",
+      "machine_key": "tls-certificate-v1",
+      "url": "https://example.org/policy",
+      "outcome": "pass",
+      "reason_code": "pass",
+      "evidence_refs": [
+        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+      ]
+    },
+    {
+      "rule_id": "C03",
+      "machine_key": "document-status-v1",
+      "url": "https://example.org/policy",
+      "outcome": "fail",
+      "reason_code": "fail",
+      "evidence_refs": [
+        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+      ]
+    },
+    {
+      "rule_id": "C04",
+      "machine_key": "document-loop-v1",
+      "url": "https://example.org/policy",
+      "outcome": "pass",
+      "reason_code": "pass",
+      "evidence_refs": [
+        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+      ]
+    },
+    {
+      "rule_id": "C05",
+      "machine_key": "document-downgrade-v1",
+      "url": "https://example.org/policy",
+      "outcome": "pass",
+      "reason_code": "pass",
+      "evidence_refs": [
+        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+      ]
+    },
+    {
+      "rule_id": "C06",
+      "machine_key": "form-action-v1",
+      "url": "https://example.org/policy",
+      "outcome": "not_applicable",
+      "reason_code": "not_applicable",
+      "evidence_refs": [
+        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+      ]
+    },
+    {
+      "rule_id": "C07",
+      "machine_key": "document-empty-v1",
+      "url": "https://example.org/policy",
+      "outcome": "inconclusive",
+      "reason_code": "inconsistent_or_unavailable",
+      "evidence_refs": [
+        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "sha256:5e9886ebeb1b616fe6bf",
+      "rule_id": "C06",
+      "url": "https://example.org/",
+      "fact": "В полученном статическом HTML задан HTTP-адрес отправки формы; форма не отправлялась.",
+      "technical_severity": "medium",
+      "color": "yellow",
+      "recommendation": "Проверьте action/formaction и фактическую обработку формы; используйте HTTPS.",
+      "reference": "Справочно: 152-ФЗ, статьи 18.1 и 19. Юридическая квалификация не выполняется.",
+      "legal_verdict": null,
+      "evidence_refs": [
+        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+      ]
+    },
+    {
+      "finding_id": "sha256:9a0dd39d5acac38f5bf2",
+      "rule_id": "C03",
+      "url": "https://example.org/policy",
+      "fact": "В HTTP-проверке конкретная ссылка на документ возвращает 404.",
+      "technical_severity": "medium",
+      "color": "yellow",
+      "recommendation": "Исправьте конкретную ссылку либо восстановите доступ к документу.",
+      "reference": "Справочно: 152-ФЗ, статьи 18.1 и 19. Юридическая квалификация не выполняется.",
+      "legal_verdict": null,
+      "evidence_refs": [
+        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+      ]
+    }
+  ],
+  "inventory": {
+    "documents": [
+      {
+        "url": "https://example.org/policy",
+        "source": "https://example.org/",
+        "label": "политика конфиденциальности",
+        "explicit": true
+      }
+    ],
+    "forms": [
+      {
+        "page": "https://example.org/",
+        "index": 0,
+        "method": "get",
+        "fields": [
+          {
+            "type": "email",
+            "name": null
+          }
+        ],
+        "action": "http://example.org/sha256:27ce1d1bf4270020e179",
+        "formaction": []
+      }
+    ],
+    "cookies": [],
+    "external_hosts": []
+  },
+  "evidence": {
+    "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672": {
+      "sha256": "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+      "data": {
+        "url": "https://example.org/",
+        "final": "https://example.org/",
+        "at": "2026-10-09T13:08:46.122368+00:00",
+        "attempt": 1,
+        "status": 200,
+        "error": "",
+        "tls_code": null,
+        "chain": [
+          {
+            "url": "https://example.org/",
+            "status": 200
+          }
+        ],
+        "body_length": 152,
+        "content_type": "text/html",
+        "forms": [
+          {
+            "index": 0,
+            "method": "get",
+            "fields": [
+              {
+                "type": "email",
+                "name": null
+              }
+            ],
+            "action": "http://example.org/sha256:27ce1d1bf4270020e179",
+            "formaction": []
+          }
+        ],
+        "ambiguous_html": false
+      }
+    },
+    "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270": {
+      "sha256": "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270",
+      "data": {
+        "url": "https://example.org/",
+        "final": "https://example.org/",
+        "at": "2026-10-09T13:08:46.122380+00:00",
+        "attempt": 2,
+        "status": 200,
+        "error": "",
+        "tls_code": null,
+        "chain": [
+          {
+            "url": "https://example.org/",
+            "status": 200
+          }
+        ],
+        "body_length": 152,
+        "content_type": "text/html",
+        "forms": [
+          {
+            "index": 0,
+            "method": "get",
+            "fields": [
+              {
+                "type": "email",
+                "name": null
+              }
+            ],
+            "action": "http://example.org/sha256:27ce1d1bf4270020e179",
+            "formaction": []
+          }
+        ],
+        "ambiguous_html": false
+      }
+    },
+    "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07": {
+      "sha256": "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+      "data": {
+        "url": "https://example.org/policy",
+        "final": "https://example.org/policy",
+        "at": "2026-10-09T13:08:46.123825+00:00",
+        "attempt": 1,
+        "status": 404,
+        "error": "",
+        "tls_code": null,
+        "chain": [
+          {
+            "url": "https://example.org/policy",
+            "status": 404
+          }
+        ],
+        "body_length": 9,
+        "content_type": "text/html"
+      }
+    },
+    "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda": {
+      "sha256": "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda",
+      "data": {
+        "url": "https://example.org/policy",
+        "final": "https://example.org/policy",
+        "at": "2026-10-09T13:08:46.123836+00:00",
+        "attempt": 2,
+        "status": 404,
+        "error": "",
+        "tls_code": null,
+        "chain": [
+          {
+            "url": "https://example.org/policy",
+            "status": 404
+          }
+        ],
+        "body_length": 9,
+        "content_type": "text/html"
+      }
+    }
+  },
+  "coverage": {
+    "completed": 7,
+    "planned": 8,
+    "ratio": 0.875,
+    "known_urls": 2,
+    "visited_urls": 2,
+    "skipped_urls": 0,
+    "note": "Покрытие обнаруженных объектов, не всего сайта."
+  },
+  "urls": {
+    "known": [
+      "https://example.org/",
+      "https://example.org/policy"
+    ],
+    "visited": [
+      "https://example.org/",
+      "https://example.org/policy"
+    ],
+    "skipped": []
+  },
+  "limitations": [
+    "ДЕМОНСТРАЦИЯ: синтетические ответы. Реальный сайт example.org не обследован.",
+    "Поверхностная автоматическая проверка HTTP и статического HTML. JavaScript, внутренние процессы и правомерность обработки не оценивались.",
+    "URL с query-параметрами не запрашиваются: в GET возможны действия и секреты.",
+    "Кандидат в релиз: полевой пилот и проверка WSL2/контейнера должны быть завершены отдельно."
+  ],
+  "legal_verdict": null,
+  "metrics": {
+    "requests": 4,
+    "bytes": 322,
+    "elapsed_seconds": 0.002
+  }
+}

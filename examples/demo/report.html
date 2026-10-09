@@ -1,0 +1,27 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>PDScan — отчёт</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:1150px;margin:30px auto;padding:0 20px;color:#18212f}a{color:#175cd3}nav{display:flex;gap:20px;flex-wrap:wrap}h1{font-size:28px}h2{margin-top:36px}article{border:1px solid #d0d5dd;border-radius:8px;padding:16px;margin:14px 0}article h3{margin-top:0}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ddd;text-align:left;padding:9px;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f5f8;padding:14px}.badge{padding:8px 14px;color:white;border-radius:8px;display:inline-block}small{color:#667085}footer{margin-top:35px;border-top:1px solid #ddd}</style><h1>PDScan · техническая проверка сайта</h1><p>https://example.org/</p><p class="badge" style="background:#856400">Жёлтый</p><p>Статус: partial. Проверено объектов: 7 / 8. Это не доля всего сайта.</p><p>Версия: 0.1.0rc1 · 2026-10-09T13:08:46.123966+00:00</p><nav><a href="#findings">Замечания</a><a href="#checks">Проверки</a><a href="#inventory">Инвентаризация</a><a href="#limits">Ограничения</a></nav><h2 id="findings">Замечания</h2><article><h3>C06 · В полученном статическом HTML задан HTTP-адрес отправки формы; форма не отправлялась.</h3><p>https://example.org/</p><p>Проверьте action/formaction и фактическую обработку формы; используйте HTTPS.</p><small>Справочно: 152-ФЗ, статьи 18.1 и 19. Юридическая квалификация не выполняется.</small></article><article><h3>C03 · В HTTP-проверке конкретная ссылка на документ возвращает 404.</h3><p>https://example.org/policy</p><p>Исправьте конкретную ссылку либо восстановите доступ к документу.</p><small>Справочно: 152-ФЗ, статьи 18.1 и 19. Юридическая квалификация не выполняется.</small></article><h2 id="checks">Результаты проверок</h2><table><tr><th>Правило</th><th>Объект</th><th>Результат</th><th>Причина</th></tr><tr><td>C01</td><td>https://example.org/</td><td>Проверено</td><td>pass</td></tr><tr><td>C02</td><td>https://example.org/</td><td>Проверено</td><td>pass</td></tr><tr><td>C03</td><td>https://example.org/</td><td>Неприменимо</td><td>not_applicable</td></tr><tr><td>C04</td><td>https://example.org/</td><td>Неприменимо</td><td>not_applicable</td></tr><tr><td>C05</td><td>https://example.org/</td><td>Неприменимо</td><td>not_applicable</td></tr><tr><td>C06</td><td>https://example.org/</td><td>Замечание</td><td>fail</td></tr><tr><td>C07</td><td>https://example.org/</td><td>Неприменимо</td><td>not_applicable</td></tr><tr><td>C01</td><td>https://example.org/policy</td><td>Неприменимо</td><td>not_applicable</td></tr><tr><td>C02</td><td>https://example.org/policy</td><td>Проверено</td><td>pass</td></tr><tr><td>C03</td><td>https://example.org/policy</td><td>Замечание</td><td>fail</td></tr><tr><td>C04</td><td>https://example.org/policy</td><td>Проверено</td><td>pass</td></tr><tr><td>C05</td><td>https://example.org/policy</td><td>Проверено</td><td>pass</td></tr><tr><td>C06</td><td>https://example.org/policy</td><td>Неприменимо</td><td>not_applicable</td></tr><tr><td>C07</td><td>https://example.org/policy</td><td>Недостаточно данных</td><td>inconsistent_or_unavailable</td></tr></table><h2 id="inventory">Инвентаризация</h2><pre>{
+  &quot;documents&quot;: [
+    {
+      &quot;url&quot;: &quot;https://example.org/policy&quot;,
+      &quot;source&quot;: &quot;https://example.org/&quot;,
+      &quot;label&quot;: &quot;политика конфиденциальности&quot;,
+      &quot;explicit&quot;: true
+    }
+  ],
+  &quot;forms&quot;: [
+    {
+      &quot;page&quot;: &quot;https://example.org/&quot;,
+      &quot;index&quot;: 0,
+      &quot;method&quot;: &quot;get&quot;,
+      &quot;fields&quot;: [
+        {
+          &quot;type&quot;: &quot;email&quot;,
+          &quot;name&quot;: null
+        }
+      ],
+      &quot;action&quot;: &quot;http://example.org/sha256:27ce1d1bf4270020e179&quot;,
+      &quot;formaction&quot;: []
+    }
+  ],
+  &quot;cookies&quot;: [],
+  &quot;external_hosts&quot;: []
+}</pre><h2 id="limits">Ограничения</h2><ul><li>ДЕМОНСТРАЦИЯ: синтетические ответы. Реальный сайт example.org не обследован.</li><li>Поверхностная автоматическая проверка HTTP и статического HTML. JavaScript, внутренние процессы и правомерность обработки не оценивались.</li><li>URL с query-параметрами не запрашиваются: в GET возможны действия и секреты.</li><li>Кандидат в релиз: полевой пилот и проверка WSL2/контейнера должны быть завершены отдельно.</li></ul><h3>Пропущенные адреса</h3><pre>[]</pre><footer><p>Автоматические технические наблюдения. Юридическое заключение и расчёт штрафов не выполнялись.</p></footer></html>
