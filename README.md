@@ -1,36 +1,21 @@
-# PDScan 0.1.0rc1 — консольный сканер сайтов
+# PDScan 0.1.0rc2 — консольный сканер сайтов
 
-Первый работающий кандидат в выпуск R1 по спецификации v1.1 от 07.10.2026.
+Первый работающий кандидат в выпуск R1 с обновлением клиентского отчёта по разделам 41–43 спецификации 1.4.
 Только HTTP и статический HTML: **без сайта сервиса, регистрации, API-ключа, LLM и подтверждения экспертом**.
-Дата выпуска: 09.10.2026. Язык отчёта — русский.
+Дата выпуска: 14.10.2026. Язык отчёта — русский.
 
 **Статус: release candidate, не окончательно принятый R1.** Автоматические тесты и установка проверены на Linux/Python 3.12.14. Пилот на 10 разрешённых публичных сайтах, WSL2 и сборка/запуск Docker ещё не выполнены. Прямой выход к example.org в среде разработки завершился DNS-ошибкой; сканер вернул серый частичный отчёт. Не заявляем 99% точности на реальных сайтах.
 
-## Репозиторий и установка из исходников
-
-Репозиторий: https://github.com/DGabdrakhimov/ScanerPDn, ветка `main`.
-
-```bash
-git clone https://github.com/DGabdrakhimov/ScanerPDn.git
-cd ScanerPDn
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install .
-pdscan doctor
-```
-
-Эта установка получает инструменты сборки из pyproject.toml. Для установки без сети используйте wheel из ZIP-пакета, как описано ниже. Перед сборкой Docker из Git checkout создайте wheel: `python -m pip wheel --no-deps . -w dist`.
-
 ## Быстрый запуск: Linux или Ubuntu в WSL2
 
-Распакуйте ZIP и перейдите в каталог `pdscan-0.1.0rc1`.
+Распакуйте ZIP и перейдите в каталог `pdscan-0.1.0rc2`.
 Нужен Python 3.11 или новее с модулем venv; проверена версия 3.12.14.
 Для Ubuntu, если Python/venv отсутствуют: `sudo apt install python3 python3-venv`.
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --no-index dist/pdscan-0.1.0rc1-py3-none-any.whl
+python -m pip install --no-index dist/pdscan-0.1.0rc2-py3-none-any.whl
 pdscan --version
 pdscan doctor
 pdscan scan https://ВАШ-ДОМЕН/ --output ./reports/first
@@ -135,12 +120,12 @@ robots.txt учитывается; неопределённость о разр�
 ## Docker (рецепт; сборка ещё не проверена)
 
 ```bash
-docker build -t pdscan:0.1.0rc1 .
+docker build -t pdscan:0.1.0rc2 .
 mkdir -p reports
 # Каталог должен быть доступен для записи указанному UID/GID.
 docker run --rm --read-only --cap-drop=ALL --security-opt=no-new-privileges \
   --user "$(id -u):$(id -g)" \
-  -v "$PWD/reports:/reports" pdscan:0.1.0rc1 \
+  -v "$PWD/reports:/reports" pdscan:0.1.0rc2 \
   scan https://ВАШ-ДОМЕН/ --output /reports/run01
 ```
 
@@ -159,5 +144,12 @@ python -m pip wheel --no-deps --no-build-isolation . -w dist
 `tools/demo.py` создаёт отчёт по синтетическим ответам без сети; это демонстрация, не проверка реального сайта.
 Тестовые приватные ключи в `tests/fixtures/tls/TEST_ONLY_key.pem` специально созданы для тестового TLS-стенда и не являются рабочими секретами. Никогда не используйте их вне тестов.
 
-В ZIP также включён `pdscan.bundle` — переносимый Git-репозиторий с коммитами и тегом кандидата. Восстановление и публикация: `docs/GIT.md`.
+Исходники включены в ZIP. Репозиторий: https://github.com/DGabdrakhimov/ScanerPDn. Git bundle в этом обновлении не включён.
 Изменения: `CHANGELOG.md`. Результаты проверки: `docs/TEST_REPORT.md`. Соответствие спецификации: `docs/TRACEABILITY.md`.
+
+
+## Обновление оформления отчёта
+
+Пошаговая установка и переоформление существующего результата: `UPDATE_R1.md`. Добавлены названия и справочник правил, объяснения результатов, таблицы инвентаризации, русские статусы и корректные единицы покрытия. Старый JSON не изменяется.
+
+Полный нормативный каталог и правовые блоки из спецификации 1.2 ещё не включены. Схема остаётся 1.0, правила r1-1. Этот пакет закрывает доработку представления, а не все требования спецификации 1.4.

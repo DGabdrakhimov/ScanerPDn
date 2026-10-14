@@ -120,6 +120,15 @@
               "type": "string",
               "pattern": "^[a-f0-9]{64}$"
             }
+          },
+          "object_kind": {
+            "enum": [
+              "page",
+              "document"
+            ]
+          },
+          "message": {
+            "type": "string"
           }
         }
       }

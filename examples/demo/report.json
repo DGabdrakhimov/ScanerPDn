@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "scanner_version": "0.1.0rc1",
+  "scanner_version": "0.1.0rc2",
   "ruleset_version": "r1-1",
-  "scan_id": "21dbc807-59a5-4e4c-b182-7290108048e9",
-  "started_at": "2026-10-09T13:08:46.122290+00:00",
-  "finished_at": "2026-10-09T13:08:46.123966+00:00",
+  "scan_id": "1f5ccd69-6e99-49de-b36b-8727f7c18a52",
+  "started_at": "2026-10-14T13:22:25.689182+00:00",
+  "finished_at": "2026-10-14T13:22:25.690380+00:00",
   "target": "https://example.org/",
   "scope": {
     "hosts": [
@@ -36,10 +36,12 @@
       "machine_key": "protocol-page-v1",
       "url": "https://example.org/",
       "outcome": "pass",
+      "object_kind": "page",
+      "message": "Техническое условие проверено; дефект не обнаружен.",
       "reason_code": "pass",
       "evidence_refs": [
-        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
-        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+        "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
+        "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76"
       ]
     },
     {
@@ -47,10 +49,12 @@
       "machine_key": "tls-certificate-v1",
       "url": "https://example.org/",
       "outcome": "pass",
+      "object_kind": "page",
+      "message": "Техническое условие проверено; дефект не обнаружен.",
       "reason_code": "pass",
       "evidence_refs": [
-        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
-        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+        "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
+        "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76"
       ]
     },
     {
@@ -58,10 +62,12 @@
       "machine_key": "document-status-v1",
       "url": "https://example.org/",
       "outcome": "not_applicable",
+      "object_kind": "page",
+      "message": "Нет объекта для этого правила в обследованном ответе.",
       "reason_code": "not_applicable",
       "evidence_refs": [
-        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
-        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+        "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
+        "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76"
       ]
     },
     {
@@ -69,10 +75,12 @@
       "machine_key": "document-loop-v1",
       "url": "https://example.org/",
       "outcome": "not_applicable",
+      "object_kind": "page",
+      "message": "Нет объекта для этого правила в обследованном ответе.",
       "reason_code": "not_applicable",
       "evidence_refs": [
-        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
-        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+        "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
+        "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76"
       ]
     },
     {
@@ -80,10 +88,12 @@
       "machine_key": "document-downgrade-v1",
       "url": "https://example.org/",
       "outcome": "not_applicable",
+      "object_kind": "page",
+      "message": "Нет объекта для этого правила в обследованном ответе.",
       "reason_code": "not_applicable",
       "evidence_refs": [
-        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
-        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+        "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
+        "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76"
       ]
     },
     {
@@ -91,10 +101,12 @@
       "machine_key": "form-action-v1",
       "url": "https://example.org/",
       "outcome": "fail",
+      "object_kind": "page",
+      "message": "В полученном статическом HTML задан HTTP-адрес отправки формы; форма не отправлялась.",
       "reason_code": "fail",
       "evidence_refs": [
-        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
-        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+        "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
+        "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76"
       ]
     },
     {
@@ -102,10 +114,12 @@
       "machine_key": "document-empty-v1",
       "url": "https://example.org/",
       "outcome": "not_applicable",
+      "object_kind": "page",
+      "message": "Нет объекта для этого правила в обследованном ответе.",
       "reason_code": "not_applicable",
       "evidence_refs": [
-        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
-        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+        "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
+        "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76"
       ]
     },
     {
@@ -113,10 +127,12 @@
       "machine_key": "protocol-page-v1",
       "url": "https://example.org/policy",
       "outcome": "not_applicable",
+      "object_kind": "document",
+      "message": "Нет объекта для этого правила в обследованном ответе.",
       "reason_code": "not_applicable",
       "evidence_refs": [
-        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
-        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+        "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
+        "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b"
       ]
     },
     {
@@ -124,10 +140,12 @@
       "machine_key": "tls-certificate-v1",
       "url": "https://example.org/policy",
       "outcome": "pass",
+      "object_kind": "document",
+      "message": "Техническое условие проверено; дефект не обнаружен.",
       "reason_code": "pass",
       "evidence_refs": [
-        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
-        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+        "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
+        "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b"
       ]
     },
     {
@@ -135,10 +153,12 @@
       "machine_key": "document-status-v1",
       "url": "https://example.org/policy",
       "outcome": "fail",
+      "object_kind": "document",
+      "message": "В HTTP-проверке конкретная ссылка на документ возвращает 404.",
       "reason_code": "fail",
       "evidence_refs": [
-        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
-        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+        "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
+        "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b"
       ]
     },
     {
@@ -146,10 +166,12 @@
       "machine_key": "document-loop-v1",
       "url": "https://example.org/policy",
       "outcome": "pass",
+      "object_kind": "document",
+      "message": "Техническое условие проверено; дефект не обнаружен.",
       "reason_code": "pass",
       "evidence_refs": [
-        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
-        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+        "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
+        "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b"
       ]
     },
     {
@@ -157,10 +179,12 @@
       "machine_key": "document-downgrade-v1",
       "url": "https://example.org/policy",
       "outcome": "pass",
+      "object_kind": "document",
+      "message": "Техническое условие проверено; дефект не обнаружен.",
       "reason_code": "pass",
       "evidence_refs": [
-        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
-        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+        "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
+        "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b"
       ]
     },
     {
@@ -168,10 +192,12 @@
       "machine_key": "form-action-v1",
       "url": "https://example.org/policy",
       "outcome": "not_applicable",
+      "object_kind": "document",
+      "message": "Нет объекта для этого правила в обследованном ответе.",
       "reason_code": "not_applicable",
       "evidence_refs": [
-        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
-        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+        "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
+        "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b"
       ]
     },
     {
@@ -179,10 +205,12 @@
       "machine_key": "document-empty-v1",
       "url": "https://example.org/policy",
       "outcome": "inconclusive",
+      "object_kind": "document",
+      "message": "Две попытки не дали согласованного результата: different_or_unavailable_observations",
       "reason_code": "inconsistent_or_unavailable",
       "evidence_refs": [
-        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
-        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+        "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
+        "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b"
       ]
     }
   ],
@@ -198,8 +226,8 @@
       "reference": "Справочно: 152-ФЗ, статьи 18.1 и 19. Юридическая квалификация не выполняется.",
       "legal_verdict": null,
       "evidence_refs": [
-        "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
-        "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270"
+        "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
+        "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76"
       ]
     },
     {
@@ -213,8 +241,8 @@
       "reference": "Справочно: 152-ФЗ, статьи 18.1 и 19. Юридическая квалификация не выполняется.",
       "legal_verdict": null,
       "evidence_refs": [
-        "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
-        "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+        "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
+        "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b"
       ]
     }
   ],
@@ -246,12 +274,12 @@
     "external_hosts": []
   },
   "evidence": {
-    "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672": {
-      "sha256": "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
+    "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f": {
+      "sha256": "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
       "data": {
         "url": "https://example.org/",
         "final": "https://example.org/",
-        "at": "2026-10-09T13:08:46.122368+00:00",
+        "at": "2026-10-14T13:22:25.689248+00:00",
         "attempt": 1,
         "status": 200,
         "error": "",
@@ -281,12 +309,12 @@
         "ambiguous_html": false
       }
     },
-    "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270": {
-      "sha256": "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270",
+    "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76": {
+      "sha256": "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76",
       "data": {
         "url": "https://example.org/",
         "final": "https://example.org/",
-        "at": "2026-10-09T13:08:46.122380+00:00",
+        "at": "2026-10-14T13:22:25.689255+00:00",
         "attempt": 2,
         "status": 200,
         "error": "",
@@ -316,12 +344,12 @@
         "ambiguous_html": false
       }
     },
-    "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07": {
-      "sha256": "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
+    "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b": {
+      "sha256": "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
       "data": {
         "url": "https://example.org/policy",
         "final": "https://example.org/policy",
-        "at": "2026-10-09T13:08:46.123825+00:00",
+        "at": "2026-10-14T13:22:25.690263+00:00",
         "attempt": 1,
         "status": 404,
         "error": "",
@@ -336,12 +364,12 @@
         "content_type": "text/html"
       }
     },
-    "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda": {
-      "sha256": "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda",
+    "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b": {
+      "sha256": "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b",
       "data": {
         "url": "https://example.org/policy",
         "final": "https://example.org/policy",
-        "at": "2026-10-09T13:08:46.123836+00:00",
+        "at": "2026-10-14T13:22:25.690273+00:00",
         "attempt": 2,
         "status": 404,
         "error": "",
@@ -387,6 +415,6 @@
   "metrics": {
     "requests": 4,
     "bytes": 322,
-    "elapsed_seconds": 0.002
+    "elapsed_seconds": 0.001
   }
 }

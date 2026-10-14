@@ -63,6 +63,7 @@ def scan(config, *, transport=None, progress=None):
         for rule in RULES:
             outcome, _, message, severity = evaluate(rule,a,b,doc,pa)
             check = {'rule_id': rule, 'machine_key': RULES[rule][0], 'url': safe_url(url), 'outcome': outcome,
+                     'object_kind': 'document' if doc else 'page', 'message': message,
                      'reason_code': outcome if outcome != 'inconclusive' else (a.error or b.error or 'inconsistent_or_unavailable'), 'evidence_refs': refs}
             result['checks'].append(check)
             if outcome == 'inconclusive': result['scan_status'] = 'partial'

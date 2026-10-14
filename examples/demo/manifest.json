@@ -1,7 +1,7 @@
 {
-  "scan_id": "21dbc807-59a5-4e4c-b182-7290108048e9",
+  "scan_id": "1f5ccd69-6e99-49de-b36b-8727f7c18a52",
   "schema_version": "1.0",
-  "scanner_version": "0.1.0rc1",
+  "scanner_version": "0.1.0rc2",
   "ruleset_version": "r1-1",
   "config": {
     "target": "https://example.org/",
@@ -19,12 +19,12 @@
     "exclude_paths": [],
     "check_external_docs": false
   },
-  "started_at": "2026-10-09T13:08:46.122290+00:00",
-  "finished_at": "2026-10-09T13:08:46.123966+00:00",
+  "started_at": "2026-10-14T13:22:25.689182+00:00",
+  "finished_at": "2026-10-14T13:22:25.690380+00:00",
   "metrics": {
     "requests": 4,
     "bytes": 322,
-    "elapsed_seconds": 0.002
+    "elapsed_seconds": 0.001
   },
   "files": [
     "report.json",
@@ -32,9 +32,9 @@
     "sanitized.log"
   ],
   "evidence_sha256": [
-    "e2797f809d798c92dfb397e44807806abc3e7ae61cdfeac327c93f145a169672",
-    "45f549cf2f2662e04a8aa204fa1ee14309ed3eba11263b6c2da72e1ab5bfd270",
-    "396eca01b95ea535fb27986084d94fa87e6f625c37ec627e192231869d59cb07",
-    "2f3232a11c3aae74fd5b6cc7367b998bd55f0c5fcb935435ed15264017aedcda"
+    "9a46a9671fdfa7809d5c5fe677fd723959d59877944617395af3d57db60ebd5f",
+    "b9460e0c85b27fe462996e2d309d056b349b29fec4bf0e8e55cb3f4fcbaeea76",
+    "6bc89e213565e99b4367b18cd26751784247a2f206c630a0d761de9ad75a676b",
+    "d3ecba4bb0850118d2dba9334143fd8f60a5ae0b251821bc2d8a0f271067034b"
   ]
 }
