@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "PDScan report 1.0",
+  "title": "PDScan report 1.1",
   "type": "object",
   "required": [
     "schema_version",
@@ -26,7 +26,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0"
+      "const": "1.1"
     },
     "scanner_version": {
       "type": "string"
@@ -82,7 +82,13 @@
           "url",
           "outcome",
           "reason_code",
-          "evidence_refs"
+          "evidence_refs",
+          "legal_basis",
+          "legal_status",
+          "legal_reason",
+          "applicability",
+          "missing_evidence",
+          "legal_verdict"
         ],
         "properties": {
           "rule_id": {
@@ -93,7 +99,13 @@
               "C04",
               "C05",
               "C06",
-              "C07"
+              "C07",
+              "B01",
+              "B02",
+              "B03",
+              "B04",
+              "B05",
+              "B06"
             ]
           },
           "machine_key": {
@@ -124,11 +136,44 @@
           "object_kind": {
             "enum": [
               "page",
-              "document"
+              "document",
+              "browser"
             ]
           },
           "message": {
             "type": "string"
+          },
+          "legal_basis": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "norm_id",
+                "act_number",
+                "article",
+                "part",
+                "source_url",
+                "checked_at"
+              ]
+            }
+          },
+          "legal_status": {
+            "enum": [
+              "insufficient_data",
+              "not_checked"
+            ]
+          },
+          "legal_reason": {
+            "type": "string"
+          },
+          "applicability": {
+            "type": "object"
+          },
+          "missing_evidence": {
+            "type": "array"
+          },
+          "legal_verdict": {
+            "type": "null"
           }
         }
       }
@@ -147,7 +192,12 @@
           "recommendation",
           "reference",
           "legal_verdict",
-          "evidence_refs"
+          "evidence_refs",
+          "legal_basis",
+          "legal_status",
+          "legal_reason",
+          "applicability",
+          "missing_evidence"
         ],
         "properties": {
           "color": {
@@ -164,6 +214,35 @@
           },
           "legal_verdict": {
             "type": "null"
+          },
+          "legal_basis": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "norm_id",
+                "act_number",
+                "article",
+                "part",
+                "source_url",
+                "checked_at"
+              ]
+            }
+          },
+          "legal_status": {
+            "enum": [
+              "insufficient_data",
+              "not_checked"
+            ]
+          },
+          "legal_reason": {
+            "type": "string"
+          },
+          "applicability": {
+            "type": "object"
+          },
+          "missing_evidence": {
+            "type": "array"
           }
         }
       }

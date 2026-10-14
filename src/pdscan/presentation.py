@@ -21,6 +21,7 @@ RULE_HELP={
 'C06':('Адрес отправки формы','Ищет явно заданный HTTP-адрес отправки у форм с полями e-mail, телефона или пароля.','Форма не отправляется; JavaScript и фактическая передача данных не проверяются.'),
 'C07':('Непустой ответ документа','Выявляет повторяющийся успешный ответ с нулевым размером тела для поддержанных форматов.','Непустой ответ может оказаться заглушкой; текст документа не анализируется.')}
 REASONS={
+'playwright_not_installed':'Браузерный модуль Playwright не установлен.', 'browser_launch_or_runtime_error':'Не удалось запустить браузер: проверьте установку Chromium и системных библиотек.', 'browser_scenario_error':'Браузерный сценарий не завершён; возможна ошибка загрузки или превышение времени.', 'browser_method_blocked':'Разрешены только GET-запросы; отправка данных заблокирована.', 'browser_navigation_blocked':'Переход или загрузка вложенного фрейма заблокированы.', 'browser_event_limit':'Достигнут лимит событий браузера.', 'browser_gateway_error':'Не удалось получить ответ через контролируемый транспорт.', 'browser_timeout':'Истёк предельный срок браузерного этапа; HTTP-отчёт сохранён.', 'browser_worker_failed':'Процесс браузера завершился без результата; HTTP-отчёт сохранён.',
 'dns_error':'Не удалось определить сетевой адрес сайта.', 'dns_timeout':'Истекло время определения сетевого адреса сайта.',
 'request_timeout':'Сайт не ответил за отведённое время.', 'transport_error':'Не удалось завершить сетевое соединение.',
 'tls_certificate':'Не пройдена проверка сертификата защищённого соединения.', 'tls_unknown':'Защищённое соединение не установлено; точная причина не определена.',
@@ -47,6 +48,7 @@ def observations(check,result):
 
 def explain(check,result):
     rule,outcome=check.get('rule_id'),check.get('outcome')
+    if rule and rule.startswith('B'): return check.get('fact','Наблюдение браузера; подробности не сохранены.')
     if outcome=='pass': return PASS.get(rule,'В выполненной технической проверке дефект не обнаружен.')
     if outcome=='fail':
         finding=next((f for f in result['findings'] if f.get('rule_id')==rule and f.get('url')==check.get('url')),None)
@@ -73,7 +75,11 @@ def explain(check,result):
     return lead+(' '+' '.join(details) if details else '')
 
 FIELD_NAMES={'email':'Электронная почта','tel':'Телефон','password':'Пароль','text':'Текстовое поле','hidden':'Служебное скрытое поле','submit':'Кнопка отправки','checkbox':'Флажок выбора','radio':'Переключатель','textarea':'Многострочный текст','select':'Список выбора','button':'Кнопка','image':'Кнопка-изображение','other':'Другой тип'}
-def esc(value): return html.escape(str(value),quote=True)
+def esc(value):
+    text=str(value)
+    if '://' in text and 'sha256:' in text and len(text)<4096:
+        text='Замаскированный идентификатор (не ссылка): '+text
+    return html.escape(text,quote=True)
 def table(headers,rows):
     return '<div class="table-wrap"><table><thead><tr>'+''.join('<th scope="col">'+esc(x)+'</th>' for x in headers)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+str(x)+'</td>' for x in row)+'</tr>' for row in rows)+'</tbody></table></div>'
 

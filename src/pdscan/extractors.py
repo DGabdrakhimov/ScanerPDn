@@ -98,8 +98,11 @@ def extract(obs):
     for a in p.links:
         url = absolute(a['href'], base)
         if not url: continue
+        matches = {m for m in (label_match(a['text']),label_match(a['label'])) if m}
         label = label_match(a['text']) or label_match(a['label'])
-        links.append({'url': url, 'document': bool(label), 'label': label,
+        types = {'consent' if m.startswith('согласие') else 'policy' for m in matches}
+        document_type = next(iter(types)) if len(types)==1 else 'unknown'
+        links.append({'url': url, 'document': bool(label), 'label': label, 'document_type': document_type,
                       'candidate': not label and bool(re.search(r'privacy|policy|consent', a['href'], re.I))})
     resources = [u for u in (absolute(x, base) for x in p.resources) if u]
     return {'forms': forms, 'links': links, 'resources': resources, 'ambiguous': p.ambiguous, 'error': ''}

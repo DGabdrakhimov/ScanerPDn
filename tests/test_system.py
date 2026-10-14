@@ -154,6 +154,7 @@ class CoreTests(unittest.TestCase):
   r['inventory']['cookies']=cookies_inventory([('https://example.org/?key=ULTRASECRET','sessionid=ULTRASECRET; Path=/; HttpOnly; Secure; SameSite=Lax')])
   raw=json.dumps(r);self.assertNotIn('ULTRASECRET',raw);self.assertNotIn('alert(123)',raw)
   r['findings']=[{'rule_id':'<script>alert(1)</script>','fact':'<img src=x onerror=alert(1)>','url':'x','recommendation':'x','reference':'x'}]
+  r['schema_version']='1.0' # Legacy rendering must still escape untrusted text.
   html=render_html(r);self.assertNotIn('<script>',html);self.assertIn('&lt;script&gt;',html)
  def test_output_and_overwrite(self):
   r,_=self.result()
@@ -162,7 +163,7 @@ class CoreTests(unittest.TestCase):
    self.assertTrue((p/'report.html').is_file())
    with self.assertRaises(ValueError):render(r,p)
    render(r,p,overwrite=True)
-   self.assertEqual(json.loads((p/'report.json').read_text())['schema_version'],'1.0')
+   self.assertEqual(json.loads((p/'report.json').read_text())['schema_version'],'1.1')
  def test_symlink_output(self):
   r,_=self.result()
   with tempfile.TemporaryDirectory() as d:

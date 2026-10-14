@@ -7,10 +7,11 @@ from . import __version__, SCHEMA_VERSION, RULESET_VERSION
 from .config import ScanError
 from .evidence import now, safe_url, token, artifact
 from .extractors import extract, cookies_inventory
-from .rules import RULES, evaluate, REFERENCE
+from .rules import RULES, evaluate
 from .transport import Transport, Observation
+from .legal import annotate
 
-LIMITATION = 'Поверхностная автоматическая проверка HTTP и статического HTML. JavaScript, внутренние процессы и правомерность обработки не оценивались.'
+LIMITATION = 'Этап R1: HTTP и статический HTML, без выполнения JavaScript. Внутренние процессы и правомерность обработки не оценивались.'
 
 
 def evidence(obs, attempt, parsed=None):
@@ -21,6 +22,7 @@ def evidence(obs, attempt, parsed=None):
     if parsed is not None:
         data['forms'] = clean_forms(parsed['forms'])
         data['ambiguous_html'] = parsed['ambiguous']
+        data['document_links'] = [{'url':safe_url(x['url']), 'label':x['label'], 'document_type':x['document_type']} for x in parsed['links'] if x['document']]
     return artifact(data)
 
 
@@ -30,7 +32,7 @@ def clean_forms(forms):
              'formaction': [safe_url(u) for u in f['overrides'] if u]} for f in forms]
 
 
-def scan(config, *, transport=None, progress=None):
+def scan(config, *, transport=None, progress=None, discovered_urls=None):
     config.validate()
     start = time.monotonic()
     client = transport or Transport(config)
@@ -48,6 +50,7 @@ def scan(config, *, transport=None, progress=None):
     pages = 0
     skipped_raw = []
     document_targets = set()
+    document_contexts = {}
     cancelled = False
     ext = set()
     def skip(url, reason):
@@ -63,14 +66,14 @@ def scan(config, *, transport=None, progress=None):
         for rule in RULES:
             outcome, _, message, severity = evaluate(rule,a,b,doc,pa)
             check = {'rule_id': rule, 'machine_key': RULES[rule][0], 'url': safe_url(url), 'outcome': outcome,
-                     'object_kind': 'document' if doc else 'page', 'message': message,
+                     'fact': message, 'message': message, 'object_kind': 'document' if doc else 'page',
                      'reason_code': outcome if outcome != 'inconclusive' else (a.error or b.error or 'inconsistent_or_unavailable'), 'evidence_refs': refs}
             result['checks'].append(check)
             if outcome == 'inconclusive': result['scan_status'] = 'partial'
             if outcome == 'fail':
                 result['findings'].append({'finding_id': token(rule+url), 'rule_id':rule, 'url':safe_url(url), 'fact':message,
                                            'technical_severity':severity, 'color':'red' if severity=='high' else 'yellow',
-                                           'recommendation':RULES[rule][2], 'reference':REFERENCE, 'legal_verdict':None, 'evidence_refs':refs})
+                                           'recommendation':RULES[rule][2], 'object_kind':'document' if doc else 'page', 'legal_verdict':None, 'evidence_refs':refs})
     active = None
     try:
         while pending:
@@ -83,10 +86,21 @@ def scan(config, *, transport=None, progress=None):
             b = client.fetch(url, document=doc)
             visited.add(url)
             result['urls']['visited'].append(safe_url(url))
-            if not doc: pages += 1
+            if not doc:
+                pages += 1
+                if discovered_urls is not None: discovered_urls.append(url)
             parsed = extract(a) if not doc and not a.error and a.status==200 and a.content_type in ('text/html','application/xhtml+xml') else None
             add_checks(url,doc,a,b,parsed)
             active = None
+            if parsed:
+                second = extract(b) if not b.error and b.status==200 and b.content_type in ('text/html','application/xhtml+xml') else None
+                for link in parsed['links']:
+                    if not link['document']: continue
+                    types_b = {x['document_type'] for x in second['links'] if x['url']==link['url'] and x['document']} if second else set()
+                    kind = link['document_type'] if types_b=={link['document_type']} else 'unknown'
+                    document_contexts.setdefault(safe_url(link['url']), []).append({
+                        'source':safe_url(url), 'label':link['label'], 'document_type':kind,
+                        'evidence_refs':result['checks'][-1]['evidence_refs']})
             if a.error or b.error:
                 skip(url, a.error or b.error)
             result['inventory']['cookies'].extend(cookies_inventory(a.cookies+b.cookies))
@@ -103,7 +117,7 @@ def scan(config, *, transport=None, progress=None):
                 if host not in config.hosts: ext.add(host)
                 if isdoc: document_targets.add(u)
                 if isdoc or link['candidate']:
-                    result['inventory']['documents'].append({'url':safe_url(u),'source':safe_url(url),'label':link['label'],'explicit':isdoc})
+                    result['inventory']['documents'].append({'url':safe_url(u),'source':safe_url(url),'label':link['label'],'explicit':isdoc,'document_type':link['document_type']})
                 if host not in config.hosts and not (isdoc and config.check_external_docs):
                     if isdoc: known.add(u); skip(u,'external_document_not_enabled')
                     continue
@@ -128,6 +142,8 @@ def scan(config, *, transport=None, progress=None):
             url,doc=active
             unknown=Observation(url,url,error='cancelled')
             add_checks(url,doc,unknown,unknown)
+            for check in result['checks'][-len(RULES):]:
+                if check['outcome']=='inconclusive': check['outcome']='not_checked'
             result['scan_status']='cancelled'
     if pending:
         for u,_,doc in pending:
@@ -137,6 +153,10 @@ def scan(config, *, transport=None, progress=None):
         if u not in accounted:
             unknown = Observation(u,u,error=reason)
             add_checks(u,u in document_targets,unknown,unknown)
+            for check in result['checks'][-len(RULES):]:
+                if check['outcome']=='inconclusive':
+                    check['outcome']='not_checked'
+                    check['fact']='Проверка не выполнена: '+reason
             accounted.add(u)
     if cancelled: result['scan_status']='cancelled'
     result['inventory']['external_hosts']=sorted(ext)
@@ -154,4 +174,4 @@ def scan(config, *, transport=None, progress=None):
     result['color']='red' if 'red' in colors else 'yellow' if 'yellow' in colors else 'grey' if result['scan_status']!='complete' or not completed else 'green'
     result['finished_at']=now()
     result['metrics']={'requests':client.requests,'bytes':client.bytes,'elapsed_seconds':round(time.monotonic()-start,3)}
-    return result
+    return annotate(result,document_contexts)
