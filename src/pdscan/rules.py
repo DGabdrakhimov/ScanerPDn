@@ -2,12 +2,12 @@ from urllib.parse import urlsplit
 from .extractors import extract
 
 RULES = {
- 'C01': ('protocol-page-v1', 'Протокол HTML-страницы', 'Проверьте доступность страницы по HTTPS и перенаправление с HTTP.'),
+ 'C01': ('protocol-page-v2', 'Протокол HTML-страницы', 'Проверьте доступность страницы по HTTPS и перенаправление с HTTP.'),
  'C02': ('tls-certificate-v1', 'Проверка сертификата TLS', 'Проверьте имя, срок, цепочку сертификата, часы и доверенные центры на машине сканера.'),
  'C03': ('document-status-v1', 'Недоступная ссылка на документ', 'Исправьте конкретную ссылку либо восстановите доступ к документу.'),
  'C04': ('document-loop-v1', 'Цикл перенаправлений документа', 'Устраните замкнутый цикл перенаправлений.'),
  'C05': ('document-downgrade-v1', 'Переход документа на HTTP', 'Проверьте HTTPS на всех переходах к документу.'),
- 'C06': ('form-action-v1', 'HTTP-адрес формы в HTML', 'Проверьте action/formaction и фактическую обработку формы; используйте HTTPS.'),
+ 'C06': ('form-action-v2', 'HTTP-адрес формы в HTML', 'Проверьте action/formaction и фактическую обработку формы; используйте HTTPS.'),
  'C07': ('document-empty-v1', 'Пустой ответ документа', 'Проверьте выдачу документа по указанному адресу.')}
 REFERENCE = 'Справочно: 152-ФЗ, статьи 18.1 и 19. Юридическая квалификация не выполняется.'
 
@@ -45,7 +45,10 @@ def single(rule, obs, document, parsed=None):
         if len(obs.body) == 0:
             return ('fail', (obs.final, 0), 'В HTTP-проверке ссылка на документ возвращает 200 с пустым телом ответа.', 'medium')
         return ok
-    if obs.status != 200 or obs.content_type not in ('text/html', 'application/xhtml+xml'): return unknown
+    if rule in ('C01','C06') and obs.status==200 and obs.content_type=='application/pdf':
+        return ('not_applicable',(), 'Получен PDF: проверка HTML-страницы или HTML-формы к этому ответу неприменима.', '')
+    if obs.status != 200 or obs.content_type not in ('text/html', 'application/xhtml+xml'):
+        return ('inconclusive',(), 'Не подтверждён HTML-ответ; правило HTML нельзя оценить по этому типу содержимого или HTTP-статусу.', '')
     parsed = parsed if parsed is not None else extract(obs)
     if parsed['ambiguous']: return ('inconclusive', (), 'Неоднозначная структура статического HTML.', '')
     if rule == 'C01':
@@ -63,9 +66,12 @@ def single(rule, obs, document, parsed=None):
 
 
 def evaluate(rule, first, second, document=False, parsed=None):
+    if not document and rule in ('C01','C06') and first.status==second.status==200 and first.content_type!=second.content_type and 'application/pdf' in (first.content_type,second.content_type):
+        return ('inconclusive',(), 'Тип ответа изменился между попытками; применимость HTML-проверки не установлена.', '')
     a = single(rule, first, document, parsed)
     b = single(rule, second, document)
     if a[0] == b[0] == 'not_applicable': return a
     if a[0] == b[0] == 'fail' and a[1] == b[1] and a[3] == b[3]: return a
     if a[0] == b[0] == 'pass': return a
+    if a[0] == b[0] == 'inconclusive' and a[2]==b[2]:return a
     return ('inconclusive', (), 'Две попытки не дали согласованного результата: '+(first.error or second.error or 'different_or_unavailable_observations'), '')

@@ -174,11 +174,14 @@ class Transport:
                     chunk = resp.read(16384)
                     if not chunk: break
                     wire += len(chunk)
-                    if wire > cap or wire > self.config.byte_limit-self.bytes: raise ScanError('body_limit')
+                    if wire > cap:
+                        self.bytes += len(chunk)
+                        raise ScanError('body_limit')
                     data = decoder.decompress(chunk, cap-decoded+1) if decoder else chunk
                     decoded += len(data)
                     self.bytes += max(len(chunk), len(data))
-                    if decoded > cap or self.bytes > self.config.byte_limit: raise ScanError('body_limit')
+                    if self.bytes > self.config.byte_limit: raise ScanError('byte_limit')
+                    if decoded > cap: raise ScanError('body_limit')
                     chunks.append(data)
                 if decoder and (not decoder.eof or decoder.unused_data): raise ScanError('invalid_compression')
             if expired.is_set(): raise ScanError('request_timeout')

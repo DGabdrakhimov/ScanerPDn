@@ -53,12 +53,14 @@ def explain(check,result):
     if outcome=='fail':
         finding=next((f for f in result['findings'] if f.get('rule_id')==rule and f.get('url')==check.get('url')),None)
         return finding.get('fact','Зафиксировано техническое замечание.') if finding else 'Зафиксировано техническое замечание; подробное описание в исходном отчёте отсутствует.'
+    if outcome=='not_applicable' and check.get('message','').startswith('Получен PDF:'):return check['message']
     if outcome=='not_applicable':
         if rule in ('C03','C04','C05','C07'): return 'Правило применяется к явно обозначенным ссылкам на документы; данный объект проверялся как обычная страница.'
         if rule=='C02': return 'В полученных ответах нет HTTPS-соединения, к которому применима проверка сертификата.'
         if check.get('object_kind')=='document': return 'Этот объект проверялся как документ; правило предназначено для HTML-страниц.'
         if rule=='C06' and check.get('object_kind')=='page': return 'В исходной разметке не найдено подходящих для этого правила форм с полями e-mail, телефона или пароля (кроме диалоговых форм).'
         return 'Для правила не найден подходящий объект. В старом отчёте не сохранён контекст, позволяющий уточнить причину.'
+    if check.get('message','').startswith('Не подтверждён HTML-ответ'):return check['message']
     obs=observations(check,result)
     details=[]
     for i,o in enumerate(obs,1):

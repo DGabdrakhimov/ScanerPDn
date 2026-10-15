@@ -53,6 +53,18 @@ def scenario_comparison(entries):
     return out
 
 def attach_browser(result,browser,urls):
+    from .browser import new_entry,finalize,SCENARIOS
+    from .evidence import safe_url
+    existing={(e['url'],e['scenario'],e['attempt']) for e in browser['scenarios']}
+    for url in urls:
+        for scenario in SCENARIOS:
+            for attempt in (1,2):
+                if (safe_url(url),scenario,attempt) not in existing:
+                    e=new_entry(url,scenario,attempt)
+                    if browser.get('error') in ('browser_timeout','browser_worker_failed','cancelled'):
+                        e.update(status='observation_lost',error=browser['error'],actions_status_unknown=True)
+                    browser['scenarios'].append(e)
+    finalize(browser)
     result['browser']=browser
     groups=defaultdict(list)
     for e in browser['scenarios']:groups[e['url']].append(e)

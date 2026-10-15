@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pdscan"
-version = "0.2.0rc1"
+version = "0.2.0rc2"
 description = "Поверхностный HTTP-сканер сайтов: технические наблюдения по ПДн"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -22,4 +22,4 @@ pdscan = "pdscan.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-pdscan = ["report.schema.json", "report-1.0.schema.json", "browser_probe.js"]
+pdscan = ["report.schema.json", "report-1.0.schema.json", "browser_probe.js", "consent_actions.js"]

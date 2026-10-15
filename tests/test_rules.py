@@ -30,7 +30,7 @@ DATA['C01']=[case(obs('http://example.org/',b)) for b in http_bodies]+[
  case(obs(error='dns_error'),'inconclusive'),case(obs(status=403),'inconclusive'),
  case(obs('http://example.org/'), 'inconclusive', second=obs()),
  case(obs('http://example.org/','<form><form><input type=email>'),'inconclusive'),
- case(obs(mime='application/pdf'),'inconclusive')]
+ case(obs(mime='application/pdf'),'not_applicable')]
 # C02: certificate codes and host contexts.
 DATA['C02']=[case(obs(url=u,error='tls_certificate',code=c)) for u,c in [
  ('https://example.org/',9),('https://example.org/',10),('https://example.org/',18),
@@ -95,7 +95,7 @@ DATA['C06']=[case(obs(body=b)) for b in forms]+[
  '<template><form action="http://example.org/"><input type=email></form></template>']]+[
  case(obs(error='request_timeout'),'inconclusive'),case(obs(body='<form><form><input type=email>'),'inconclusive'),
  case(obs(body=forms[0]),'inconclusive',second=obs(body=forms[0].replace('http:','https:'))),
- case(obs(status=403),'inconclusive'),case(obs(mime='application/pdf'),'inconclusive')]
+ case(obs(status=403),'inconclusive'),case(obs(mime='application/pdf'),'not_applicable')]
 # C07: supported MIME, status and non-empty content.
 DATA['C07']=[case(obs(url=u,body='',mime=m),doc=True) for u,m in [
  ('https://example.org/policy','text/html'),('https://example.org/policy','text/plain'),('https://example.org/policy','application/pdf'),('https://example.org/policy','application/xhtml+xml'),

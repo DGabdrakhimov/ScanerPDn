@@ -32,6 +32,8 @@ class BrowserIntegrationTests(unittest.TestCase):
   self.assertEqual(len(result['scenarios']),8)
   for e in result['scenarios']:
    self.assertTrue(e['snapshot']['controls'][0]['checked'])
+   self.assertGreaterEqual(len(e['diagnostics']['candidates']),4)
+   self.assertTrue(all('label' not in x for x in e['diagnostics']['candidates']))
    self.assertTrue(e['snapshot']['controls'][0]['combined'])
    self.assertEqual(e['before']['storage'],[]) # Every context starts clean.
    self.assertTrue(any(x['method']=='POST' and x['delivery']=='blocked' for x in e['events']))

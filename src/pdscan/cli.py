@@ -39,8 +39,11 @@ def parser():
     s.add_argument('--mode',choices=('r1','combined'),default='r1',help='r1: HTTP; combined: R1 и браузер R2')
     s.add_argument('--browser-pages',type=int,default=1)
     s.add_argument('--browser-wait-ms',type=int,default=1500)
-    s.add_argument('--browser-max-requests',type=int,default=150)
-    s.add_argument('--browser-time-limit',type=int,default=180)
+    s.add_argument('--browser-max-requests',type=int,default=300)
+    s.add_argument('--browser-time-limit',type=int,default=300)
+    s.add_argument('--browser-total-mib',type=int,default=100)
+    s.add_argument('--browser-attempt-mib',type=int,default=25)
+    s.add_argument('--browser-response-mib',type=int,default=8)
     c=sub.add_parser('compare',help='Сравнить два JSON-отчёта без сети')
     c.add_argument('before');c.add_argument('after');c.add_argument('--output',required=True)
 
@@ -110,7 +113,7 @@ def main(argv=None):
             write_file(output/'comparison.html',comparison_html(result).encode())
             print(str(output/'comparison.html'));return 0
         config=configuration(args)
-        options=BrowserOptions(args.browser_pages,args.browser_wait_ms,args.browser_max_requests,args.browser_time_limit).validate()
+        options=BrowserOptions(args.browser_pages,args.browser_wait_ms,args.browser_max_requests,args.browser_time_limit,total_mib=args.browser_total_mib,attempt_mib=args.browser_attempt_mib,response_mib=args.browser_response_mib).validate()
 
         output=prepare_output(args.output,args.overwrite)
         # An empty directory is reserved before the first network request.

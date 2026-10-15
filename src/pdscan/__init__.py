@@ -1,3 +1,3 @@
-__version__ = "0.2.0rc1"
+__version__ = "0.2.0rc2"
 SCHEMA_VERSION = "1.1"
-RULESET_VERSION = "r2-1"
+RULESET_VERSION = "r2-2"
